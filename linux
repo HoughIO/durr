@@ -1,0 +1,194 @@
+# get a site from an ip
+wget --header="Host: whatever.domain.name.com" http://127.0.0.1/some/path/file.php
+
+# use xargs to download a list of urls
+xargs -n 1 curl -O < urls.txt
+
+# monitor a process
+strace -f -p $PID
+
+# Show all ruby-related PIDs and processes
+pgrep -fl ruby
+
+# What files does a process have open?
+lsof -p $PID
+
+# All processes, with params + hierarchy
+ps auxww -H
+
+# rename
+rename "s/$/.old/g" *
+
+# list open ssh conneciton/tunnels
+sudo lsof -i -n | egrep '\<ssh\>'
+
+# tarball excluding dotfiles
+tar --exclude ".*" -cvzf file.tar.gz *
+
+# diff from two remotes
+diff <(ssh ci 'cat /etc/ssh/sshd_config') <(ssh ops 'cat /etc/ssh/sshd_config')
+
+# Get the 10 biggest files/folders for the current direcotry
+du -s * | sort -n | tail
+du -sk * |sort -rn |head
+du -sh * | sort -rh | head
+ls -1rSA | tail
+
+# reconfigure timezones (ubuntu)
+dpkg-reconfigure tzdata
+
+# Remove grep command while grepping something using ps command
+ps auxwww | grep java | grep -v grep
+
+# kill all those solr processes started on 8981
+kill -9 `ps aux | grep solr | grep 8981 | awk '{print $2}'`
+
+# ubuntu services listing
+service --status-all
+
+# diff directories
+diff -qr a b
+diff -qr a b | grep -v -e 'DS_Store' -e 'Thumbs'
+
+# list installed packages
+aptitude search '~i'
+
+# idenify processes by port
+lsof -i :80
+netstat -tulpn | grep :80
+netstat -lp | grep apache2
+
+# find zombie processes
+ps aux | awk '{ print $8 " " $2 }' | grep -w Z
+
+# and kill them
+kill -HUP `ps -A -ostat,ppid | grep -e '^[Zz]' | awk '{print $2}'`
+
+# add/remove from init.d
+sudo update-rc.d unicorn default
+sudo update-rc.d -f unicorn remove
+
+# Add user
+useradd tony -d /home/tony
+
+# Add a existing user to existing group
+usermod -a -G ftp tony
+
+# Change existing user tony primary group to www:
+usermod -g www tony
+
+# remove a user from a group
+passwd -d www tony
+
+# set password with string
+echo username:password | chpasswd
+
+# Remove users password
+passwd -d username
+
+# change console resolution for virtual machine
+sudo vim /etc/default/grub
+GRUB_GFXMODE=1024×768
+sudo update-grub2
+sudo shutdown -r 0
+
+# listing aliases
+alias
+compgen -a
+type -a myAlias
+
+#ignoring an alias
+alias ls='ls -al'
+command ls
+
+# mount drive in virtualbox ubuntu
+# With a shared folder named share, as above, the folder can be mounted as the
+# directory ~/host with the command:
+sudo mount -t vboxsf -o uid=$UID,gid=$GID share ~/host
+
+# find external ip
+curl http://ipecho.net/plain; echo
+
+# bulk rename git repo origins
+find . -path \*/.git/config -exec sed -e 's/this/that/' -i config {} \;
+
+# get number of processors
+cat /proc/cpuinfo | grep processor | wc -l
+
+# user login history
+last
+
+# with ip address
+last -a
+
+# with ip address and secific user
+last miked -a
+
+# check kernel name
+uname -m
+
+# check distro version
+lsb_release -a
+
+# split files by bytes
+split -C 1100 -d entries_list 'batch'
+
+# apt, remove package
+apt-get --purge remove
+
+# date in epoch
+date +"%s"
+
+# diff directories recurrsively
+diff -qr dir1 dir2
+
+
+# dumb add user
+sudo useradd -G sudo -m miked -s /bin/bash
+sudo mkdir -m 700 /home/miked/.ssh
+sudo chown miked:miked /home/miked/.ssh
+
+# sed find & replace on OSX
+LC_CTYPE=C && LANG=C find . -type f -iname "*.rb" -exec sed -i '' 's/successURL/success_url/g' "{}" +;
+
+# remove leading spaces
+sed 's/^[ \t]*//'
+# trailing
+sed 's/[ \t]*$//'
+
+# ALWAYS SUDO LIKE THIS
+echo %miked ALL=NOPASSWD:ALL > /etc/sudoers.d/miked
+chmod 0440 /etc/sudoers.d/miked
+
+# Setup sudo to allow no-password sudo for "sudo"
+usermod -a -G sudo miked
+
+# check for openssl versions on nginx (or other things)
+# http://nginx.com/blog/nginx-and-the-heartbleed-vulnerability/
+ldd `which nginx` | grep ssl
+strings /lib/x86_64-linux-gnu/libssl.so.1.0.0 | grep "^OpenSSL "
+./objs/nginx -V
+
+ps uwwp $(sudo find /proc -maxdepth 2 -name maps -exec grep -HE '/libssl\.so.* \(deleted\)' {} \; | cut -d/ -f3 | sort -u)
+dpkg -l | grep openssl
+
+# resume failed download with curl
+curl -C - -o file 'url_of_file'
+
+# follow redirect
+curl -L whatever
+
+# output sections of a file
+sed -n '20,40p' filename.txt
+
+# diff remote files
+diff <(ssh $1 "cat $2") <(ssh $3 "cat $4")
+
+# diff sections of two files
+diff <(sed -n '20,40p' one.txt) <(sed -n '20,40p' two.txt)
+
+# nmap icmp scan
+nmap -sn 10.0.1.0-254
+
+# ssh escape seq
+<enter> ~ .

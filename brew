@@ -1,0 +1,40 @@
+================================================================================
+The grep tool is outdated on OS X 10.8 Mountain Lion so you might have to
+upgrade it. Unfortunately the main homebrew repo does not contain grep so use
+the following command to get the lastest version.
+
+brew install https://raw.github.com/Homebrew/homebrew-dupes/master/grep.rb
+
+or if you have heightened security set up, just tap the homebrew dupes and
+install grep
+
+brew tap homebrew/dupes
+brew install homebrew/dupes/grep
+
+================================================================================
+$ brew uninstall node
+$ brew versions node
+0.8.3    git checkout 31f8d9f Library/Formula/node.rb
+0.8.2    git checkout 50ae8e4 Library/Formula/node.rb
+0.8.1    git checkout 9ff0a1d Library/Formula/node.rb
+0.8.0    git checkout 01f8006 Library/Formula/node.rb
+0.6.19   git checkout 83988e4 Library/Formula/node.rb
+Now checkout the desired version. Assuming you're at /usr/local/:
+
+$ git checkout 83988e4 Library/Formula/node.rb
+$ brew install node
+
+================================================================================
+
+node -v
+brew upgrade node
+brew unlink node
+brew link node
+brew versions node
+brew switch node 0.10.29
+brew postinstall node
+brew which node
+
+http://stackoverflow.com/questions/3987683/homebrew-install-specific-version-of-formula
+
+================================================================================

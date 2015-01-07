@@ -1,0 +1,37 @@
+# RAID 10 // http://docs.mongodb.org/ecosystem/tutorial/install-mongodb-on-amazon-ec2/
+mdadm --verbose --create /dev/md0 --level=10 --chunk=256 --raid-devices=4 /dev/sdh1 /dev/sdh2 /dev/sdh3 /dev/sdh4
+echo 'DEVICE /dev/sdh1 /dev/sdh2 /dev/sdh3 /dev/sdh4' | sudo tee -a /etc/mdadm.conf
+mdadm --detail --scan | sudo tee -a /etc/mdadm.conf
+
+# set read-aheaed
+blockdev --setra 128 /dev/md0
+blockdev --setra 128 /dev/sdh1
+blockdev --setra 128 /dev/sdh2
+blockdev --setra 128 /dev/sdh3
+blockdev --setra 128 /dev/sdh4
+
+# create volume group
+dd if=/dev/zero of=/dev/md0 bs=512 count=1
+pvcreate /dev/md0
+vgcreate vg0 /dev/md0
+
+# create volumes
+lvcreate -l 90%vg -n data vg0
+lvcreate -l 5%vg -n log vg0
+lvcreate -l 5%vg -n journal vg0
+
+mke2fs -t ext4 -F /dev/vg0/data
+mke2fs -t ext4 -F /dev/vg0/log
+mke2fs -t ext4 -F /dev/vg0/journal
+
+mkdir /data
+mkdir /log
+mkdir /journal
+
+'/dev/vg0/data /data ext4 defaults,auto,noatime,noexec 0 0' | sudo tee -a /etc/fstab
+'/dev/vg0/log /log ext4 defaults,auto,noatime,noexec 0 0' | sudo tee -a /etc/fstab
+'/dev/vg0/journal /journal ext4 defaults,auto,noatime,noexec 0 0' | sudo tee -a /etc/fstab
+
+mount /data
+mount /log
+mount /journal

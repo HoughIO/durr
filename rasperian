@@ -1,0 +1,3 @@
+# change volume on audio jack (between 90-100%)
+amixer cset numid=1 -- 94%
+function vol { amixer cset numid=1 -- $1% }

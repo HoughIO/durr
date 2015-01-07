@@ -1,0 +1,11 @@
+# diff multiple files
+vi -d file1 file2 file3 file4
+
+# open two files in split
+vi -o2 file1 file2
+
+# j
+:source $MYVIMRC
+
+# list installed scripts
+:scriptnames

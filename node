@@ -1,0 +1,2 @@
+# global: npm installs packages into the install prefix at prefix/lib/node_modules and bins are installed in prefix/bin.
+npm install whatever --global

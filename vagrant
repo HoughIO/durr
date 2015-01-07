@@ -1,0 +1,2 @@
+vagrant init opscode-ubuntu-1204
+vagrant --no-provision up

@@ -1,0 +1,73 @@
+# set a list of installed 'plugins'
+:scriptnames
+:commands
+:functions
+
+# vim-surround
+# https://github.com/tpope/vim-surround
+################################################################################
+"Hello world!"
+Press cs"' to change it to
+'Hello world!'
+
+To remove the delimiters entirely, press ds".
+Hello world!
+
+Hello world!
+Now with the cursor on "Hello", press ysiw] (iw is a text object).
+[Hello] world!
+
+# vim-repeat
+################################################################################
+example with vim-surround:
+foo bar baz quux muux woox
+type csw"
+"foo" bar baz quux muux woox
+now press W. Move to antoher with and press '.'
+"foo" "bar" baz quux muux woox
+
+# nerdcommenter
+################################################################################
+\cl aligned comment
+\cu uncomment
+
+# loremipsum
+# https://github.com/vim-scripts/loremipsum
+################################################################################
+:Loremipsum[!] [WORDCOUNT] [PARAGRAPH_TEMPLATE] [PREFIX POSTFIX]
+    Insert some random text.
+
+:Loreplace [REPLACEMENT] [PREFIX] [POSTFIX]
+    Replace the random text with something else or simply remove it.
+
+# vim-open-url
+# https://github.com/henrik/vim-open-url
+################################################################################
+Trigger with <leader>u or :OpenURL.
+
+# vim-fugitive
+################################################################################
+
+:Gdiff
+:ls # list buffers
+:diffget //2
+:diffput <middle doc name>
+
+:only # close left and right windows in a three-way
+
+# misc/etc
+[c	jump to previous hunk
+]c	jump to next hunk
+dp	shorthand for `:diffput`
+:only	close all windows apart from the current one
+:Gwrite[!]	write the current file to the index
+
+# NERDTree
+################################################################################
+Use the natural vim navigation keys hjkl to navigate the files.
+Press o to open the file in a new buffer or open/close directory.
+Press t to open the file in a new tab.
+Press i to open the file in a new horizontal split.
+Press s to open the file in a new vertical split.
+Press p to go to parent directory.
+Press r to refresh the current directory.

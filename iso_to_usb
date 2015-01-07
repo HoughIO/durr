@@ -1,0 +1,10 @@
+export ISO_FILE=ubuntu-14.04-server-amd64.iso
+
+hdiutil convert -format UDRW -o $ISO_FILE.img $ISO_FILE
+# OR
+hdiutil convert -format Rdxx -o $ISO_FILE.img $ISO_FILE
+
+diskutil list
+diskutil unmountDisk /dev/disk1
+
+sudo dd bs=1m if=$ISO_FILE.img of=/dev/disk1

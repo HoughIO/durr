@@ -1,0 +1,10 @@
+cd src
+CC=clang ./configure --with-features=huge \
+              --enable-rubyinterp \
+              --enable-pythoninterp \
+              --enable-perlinterp \
+              --enable-cscope
+make
+
+# open MacVim/build/Release/MacVim.app
+# open MacVim/build/Release

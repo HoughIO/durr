@@ -1,0 +1,24 @@
+# http://devstructure.com/blueprint/#create
+# http://devstructure.com/blueprint/#puppet-chef
+
+# installation
+echo "deb http://packages.devstructure.com $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/devstructure.list
+sudo wget -O /etc/apt/trusted.gpg.d/devstructure.gpg http://packages.devstructure.com/keyring.gpg
+sudo apt-get update
+sudo apt-get -y install blueprint
+
+export BP_NAME=temp
+blueprint create $BP_NAME
+blueprint-destroy $BP_NAME
+
+blueprint show $BP_NAME
+blueprint-show-files $BP_NAME
+blueprint-show-packages $BP_NAME
+blueprint-show-services $BP_NAME
+blueprint-show-sources $BP_NAME
+
+# Generate a Puppet module in name/manifests/init.pp:
+blueprint show -P $BP_NAME
+
+# Generate a Chef cookbook in name/recipes/default.rb:
+blueprint show -C $BP_NAME

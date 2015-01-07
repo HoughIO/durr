@@ -1,0 +1,78 @@
+# remove untracked files forcefully
+git clean -fd
+git clean -fdn # DRY RUN
+
+# rename a branch
+git branch -m old_branch new_branch
+
+# Make an empty commit and rollback
+git commit --allow-empty
+git rebase -i HEAD^^
+git push -f
+
+# Don't accidentally commit changes with `git commit -am` on certian files.
+git update-index --assume-unchanged <file>
+git update-index --no-assume-unchanged <file>
+
+# stop tracking a file without deleting it locally
+git rm --cached filename
+
+git remote set-url origin git@github.com:user/repo.git
+
+# submodules
+############
+
+# add submodile
+git submodule add http://github.com/tpope/vim-fugitive.git bundle/fugitive
+# update all
+git submodule foreach git pull origin master
+
+# deleted files
+###############
+
+# list deleted files
+git log --diff-filter=D --summary
+
+# get ref for deleting commit
+git rev-list -n 1 HEAD -- <file_path>
+
+# and checkout file before the deletion
+git checkout <deleting_commit>^ -- <file_path>
+
+# diff and patch
+########################################
+
+# compare files between branches
+git diff mybranch master -- myfile.cso
+git diff branch1:file branch2:file
+
+# patching
+git diff > this.patch
+git apply --stat this.patch
+git apply this.patch
+
+# patch from another branch
+git diff master.. db/seeds.rb | git apply --stat
+# or
+git diff --color=never master.. db/seeds.rb | patch -p0
+
+# use Kaleidoscope to diff
+git difftool -t Kaleidoscope
+
+# delete branch at origin
+git push origin --delete <branchName>
+git push origin :<branchName>
+
+# clear stashes
+git stash clear
+
+# show stashes as diff
+git stash show -p stash@{1}
+
+# log and history
+#################
+
+# search history
+git grep $REGEXP $(git rev-list --all)
+# OR
+git rev-list --all | xargs git grep $REGEX

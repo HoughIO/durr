@@ -1,0 +1,25 @@
+http://www.postgresql.org/docs/9.3/static/app-psql.html
+
+sudo -u postgres psql -U postgres -W
+
+# help
+\?
+
+# list databases
+\l
+
+# connect to database
+\c database_name
+
+# list tables
+\dt
+\dt *.*
+
+# connect to database_name
+\c database_name
+
+# list of roles
+\du
+
+# start on osx
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start &

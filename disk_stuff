@@ -1,0 +1,2 @@
+# resize after growing EBS volume // http://alestic.com/2010/02/ec2-resize-running-ebs-root
+resize2fs /dev/xvda1

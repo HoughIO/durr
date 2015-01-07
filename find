@@ -1,0 +1,30 @@
+# find and delete broken symlinks
+find -L . -type l -delete
+
+# count lines in ruby
+ruby -e 'puts open(ARGV.shift).read.count("\n")' <file>
+
+# find resque workers running on staging
+initctl list | grep resque | grep run
+
+# find and list name and size
+find . -name captured-output.log -exec stat -c "%n %s" {} \;
+
+# find files that have changed in the past 24 hours (backgrounded)
+find / -ctime -1 > /tmp/changed-file-list.txt &
+
+# find and remove empty directories
+find . -type d -empty
+find . -type d -empty -exec rmdir {} \;
+
+# reverse symlink
+find -L /dir/to/start -samefile /tmp/orig.file
+
+# find files, then find in them. Include filename (what about path?)
+find . -name whatever.rb -exec grep -H "blah" {} \;
+
+# find and remove files
+find . -type f -name "FILE-TO-FIND" -exec rm -f {} \;
+
+# find symlinks in current folder (no recursion)
+find . -maxdepth 1 -type l

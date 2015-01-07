@@ -1,0 +1,30 @@
+
+# Seek to given time position in seconds. “hh:mm:ss[.xxx]” syntax is also
+#  supported.
+# -ss position
+
+# Set the recording time in seconds. “hh:mm:ss[.xxx]” syntax is also supported.
+# -t duration
+
+# Input filename
+# -i filename
+
+# Use same video quality as source (implies VBR).
+# -sameq
+
+# cut part of video
+ffmpeg -i $INPUT_FILE -sameq -ss $START_SECONDS -t $DURATION_SECONDS $OUTPUT_FILE
+
+# Save frames from video
+ffmpeg -i $INPUT_FILE -r 1 -t 40 -ss 01:30:14 $OUTPUT_FILE
+
+# -vframes = number of video frames to record
+ffmpeg -i $INPUT_FILE -r 1 -vframes 120 -ss 01:30:14 $OUTPUT_FILE
+
+# convert mp4 to webm
+# https://wiki.installgentoo.com/index.php?title=WebM
+ffmpeg -i $INPUT_FILE -c:v libvpx -b:v 1M -c:a libvorbis $OUTPUT_FILE
+
+# resize video resolution
+ffmpeg -i $INPUT_FILE -s 720x480 -c:a copy $OUTPUT_FILE
+ffmpeg -i $INPUT_FILE -filter:v scale=720:-1 -c:a copy $OUTPUT_FILE

@@ -1,0 +1,48 @@
+# timed screen capture or use Grap.app
+screencapture -T 10 fileName.png
+
+# flush dns
+dscacheutil -flushcache
+
+# stop postgress on osx
+pg_ctl stop
+
+# load/unload a service from launchctl
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+
+# Get rid of Desktop
+defaults write com.apple.finder CreateDesktop -bool false
+defaults write com.apple.finder CreateDesktop -bool true
+
+# disable/re-enable Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean YES
+defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+
+# remove extended attributes from folders?
+$ xattr SomeAttr
+com.apple.quarantine
+$ xattr -d com.apple.quarantine SomeAttr
+
+# adapter address
+ifconfig en1  | grep 'inet ' | cut -d ' ' -f 2
+
+# launchctl says "nothing found to load"
+# -w Overrides the Disabled key and sets it to false. In previous versions, this option would modify the configuration file. Now the state of the Disabled key is stored elsewhere on-disk.
+# -F Force the loading of the plist. Ignore the Disabled key.
+sudo launchctl load -w -F /path/to/myplist.plist
+
+# sed find & replace on OSX
+LC_CTYPE=C && LANG=C find . -type f -not -path "./.git/*" -exec sed -e "s/this/that/" -i "" '{}' +
+LC_ALL=C && LC_CTYPE=C && LANG=C find . -type f -not -path "./.git/*" -exec sed -e "s/this/that/" -i "" '{}' +
+
+# resolve Bonjour (mDNS) addresses
+dig @224.0.0.251 -p 5353 hostname.local
+
+# checksums
+md5 FILENAME
+openssl sha1 FILENAME
+shasum -a 1 FILENAME
+shasum -a 256 FILENAME

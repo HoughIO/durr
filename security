@@ -1,0 +1,59 @@
+# generate ssh keys
+ssh-keygen -t rsa -f $FILENAME -C "$COMMENT" -N ''
+
+# fingerprint on public key
+ssh-keygen -l -f $FILENAME
+
+# fingerprint aws ec2 pem key (matches their format)
+openssl pkcs8 -in $FILENAME -nocrypt -topk8 -outform DER | openssl sha1 -c
+
+# show public key for private key
+ssh-keygen -y -f $FILENAME
+
+# show public key for pem
+openssl rsa -in private.pem -pubout
+
+# create certificate
+openssl req -x509 -batch -nodes -newkey rsa:2048 -keyout KEY_FILE -out CERTIFICATE_FILE
+
+# information about keys
+openssl x509 -in CERTIFICATE_FILE -text
+openssl x509 -in CERTIFICATE_FILE -serial
+openssl x509 -in CERTIFICATE_FILE -fingerprint
+
+# information about certificate sigining request
+openssl req -in CSR_FILE -noout -text
+
+# remove password from ssl key
+openssl rsa -in ORIGINAL_KEY_FILE -out NEW_KEY_FILE
+
+# convert to PEM
+openssl x509 -in input.crt -out input.der -outform DER
+openssl x509 -in input.der -inform DER -out output.pem -outform PEM
+
+# self signed certificate
+openssl genrsa -des3 -out server.key 4096
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+openssl rsa -in server.key -out server.key.insecure
+mv server.key server.key.secure
+mv server.key.insecure server.key
+
+# self signed wildcard certificate
+openssl genrsa 2048 > server.key
+openssl req -new -x509 -nodes -sha1 -days 3650 -key server.key > server.crt
+# Common Name (eg, your name or your server's hostname) []:*.example.com
+openssl x509 -noout -fingerprint -text < server.crt > server.info
+cat server.crt server.key > server.pem
+chmod 644 server.key server.pem
+
+
+openssl s_client -connect some_site.com:443
+openssl s_client -CApath /etc/ssl/certs/ -connect www.fqdn.com:443
+
+# signing
+openssl dgst -sha256 data.txt > hash
+openssl rsautl -sign -inkey privatekey.pem -keyform PEM -in hash > signature
+
+# verifying
+openssl rsautl -verify -inkey publickey.pem -keyform PEM -in signature

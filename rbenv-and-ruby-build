@@ -1,0 +1,29 @@
+# apparently this is important these days
+# MACOSX_DEPLOYMENT_TARGET=10.9
+
+export CC=/usr/local/bin/gcc-4.2
+export MACOSX_DEPLOYMENT_TARGET=10.9
+export RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline`
+export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+
+----------------------------------------
+
+gem install nokogiri  -v '1.6.1' -- \
+--use-system-libraries \
+--with-iconv-dir=/usr/local/Cellar/libiconv/1.14/ \
+--with-xml2-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/libxml2
+
+----------------------------------------
+
+sudo xcode-select -s /Library/Developer/CommandLineTools/
+gem install nokogiri
+sudo xcode-select -r
+
+----------------------------------------
+
+brew install v8
+gem install libv8 -v '3.16.14.3' -- --with-system-v8
+
+----------------------------------------
+
+mv /usr/local/include/uuid/uuid.h ~/Desktop/

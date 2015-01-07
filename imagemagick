@@ -1,0 +1,31 @@
+# exif data
+identify -verbose image.jpg
+
+# idunno
+convert -append -background none some_images_* new_image.png
+convert old.jpg -resize 50% new.jpg
+
+# video to gif
+################################################################################
+ffmpeg -i source.mkv -vcodec copy -acodec copy -scodec copy out.mp4
+# gifrocket app!
+gifsicle --optimize=9 out.gif >| new.gif
+
+# center crop some images (http://www.imagemagick.org/Usage/crop/)
+for i in *.png; do convert $i -crop 1000x300+0+0 "new_$i.gif"; done
+
+# build gif from images
+gifsicle --delay=100 --loop *.gif > this.gif
+
+# Specifically for pull requests
+################################################################################
+# resize?
+ffmpeg -i $INPUT_FILE -filter:v scale=720:-1 -acodec copy $OUTPUT_FILE
+
+# screen record with Quicktime to .mov
+export INPUT_FILE=ScreenFlow.mov
+export OUTPUT_FILE=output.gif
+export OUTPUT_FILE_OPTOMIZED=output_optomized.gif
+
+ffmpeg -i $INPUT_FILE -pix_fmt rgb24 output.gif
+convert -layers Optimize $OUTPUT_FILE $OUTPUT_FILE_OPTOMIZED

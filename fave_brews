@@ -1,0 +1,57 @@
+iftop # interface top
+cmatrix #an lol matrix screen
+rename
+hub
+toilet
+the_silver_searcher
+knife-completion
+tree
+sqlite
+tmux
+watch
+sl
+gti
+htop-osx
+
+# installed at some point
+ack
+autoconf
+automake
+cmake
+couchdb
+ctags
+erlang
+gdbm
+gecode
+gettext
+git
+gnu-sed
+help2man
+hub
+icu4c
+imagemagick
+jpeg
+libevent
+libpng
+libtool
+libxml2
+libxslt
+mercurial
+mutt
+mysql
+nginx
+nspr
+pcre
+pkg-config
+python
+qt
+rabbitmq
+rails-completion
+readline
+reattach-to-user-namespace
+redis
+solr
+spidermonkey
+tokyo-cabinet
+
+bash # bash 4

@@ -1,0 +1,2 @@
+-s no line numbers (supress)
+-h no filename

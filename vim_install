@@ -1,0 +1,22 @@
+# Create the directories you need
+sudo mkdir -p /opt/local/bin
+
+# Download, compile, and install the latest Vim
+hg clone https://code.google.com/p/vim/
+cd vim
+./configure --prefix=/opt/local
+make
+sudo make install
+
+# Add the binary to your path, ahead of /usr/bin
+echo 'PATH=/opt/local/bin:$PATH' >> ~/.bash_profile
+
+# Reload bash_profile so the changes take effect in this window
+source ~/.bash_profile
+
+#Voila! Now when we use vim we will be using the old one. But, to get back to our old configuration in the event of huge f*ckups, we can just delete the /opt directory.
+which vim
+vim --version | head -n 2
+
+
+http://jamie.curle.io/blog/compiling-vim-os-x-lion-python-ruby-support/

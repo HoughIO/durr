@@ -1,0 +1,15 @@
+To connect:
+    mysql -uroot
+
+To load mysql:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+Or, if you don't want/need launchctl, you can just run:
+    mysql.server start
+
+CREATE DATABASE accounts_development;
+CREATE USER 'accounts'@'localhost';
+SET PASSWORD FOR 'accounts'@'localhost' = PASSWORD('accounts');
+GRANT ALL PRIVILEGES ON accounts_development.* TO 'accounts'@'localhost' IDENTIFIED BY 'accounts';
+
+DROP DATABASE accounts_development;
+DROP USER 'accounts'@'localhost';

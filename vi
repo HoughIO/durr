@@ -1,0 +1,124 @@
+# open vim with no startup files
+vim -u NONE --noplugin -N
+
+# folding
+za # open fold
+zA # open fold recursively
+
+zo # opens a fold at the cursor.
+zO # opens a folds at the cursor recursively.
+
+zm # increases the foldlevel by one.
+zM # closes all open folds.
+
+zr # decreases the foldlevel by one.
+zR # decreases the foldlevel to zero -- all folds will be open.
+
+zj # moves the cursor to the next fold.
+zk # moves the cursor to the previous fold.
+
+# http://madyogi.wordpress.com/2008/05/15/vim-how-to-replace-a-word-string-in-several-files/
+vim *.cpp		Start Vim, defining the argument list to
+			contain all the C++ files.  You are now in the
+			first file.
+qq			Start recording into the q register
+:%s/\<GetResp\>/GetAnswer/g
+			Do the replacements in the first file.
+:wnext			Write this file and move to the next one.
+q			Stop recording.
+@q			Execute the q register.  This will replay the
+			substitution and ":wnext".  You can verify
+			that this doesn't produce an error message.
+999@q 			Execute the q register on the remaining files.
+
+# General recording
+qq            : record keystrokes to register q
+... enter some commands...
+q             : quit recording
+@q            : execute commands again
+@@            : repeat
+
+# wrap existing text at 80 characters
+:set textwidth=80
+### select lines with v
+gq
+
+# indent an entire line
+>>
+### or
+<shift> >
+
+# goto top of file
+gg
+
+# repeatedly insert i 8 times while still in insert-mode using <C-o>
+<C-o>8ia<Esc>
+# or, out of insert mode (is that command mode?)
+8ia<Esc>
+
+# ruby
+:set ft=ruby
+
+# delete lines matching pattern
+:g/<pattern>/d
+# delete lines NOT matching pattern
+:g!/<pattern>/d
+:v/<pattern>/d
+
+# change character to upper/lower case
+gU <movement>
+gu <movement>
+
+# cycle throught window layouts?
+# :help split
+# :help ^w
+ctrl-w H # horizontal to vertical
+ctrl-w J # vertical to horizonal
+ctrl-w W # rotate orientation
+ctrl-w L # move to the right
+ctrl-w r # rotate row
+ctrl-w c # rotate column
+
+# rot13 some text
+g? #then movement
+g?g? #entire line
+
+# center viewpoint around current position
+zz
+
+# skip through time
+:earlier 35s
+:later 12s.
+
+#spell
+:set spell
+z= # suggest words
+]s # forwards
+[s # backwards
+
+# cream-capitalization
+  F5           Capitalize selection, title case
+  Shift+F5     Uppercase selection
+  Alt+F5       Lowercase selection
+  Ctrl+F5      Reverse case of selection
+
+# sort and unique
+sort u
+
+# encrypt
+# set cm=blowfish
+# set cryptmethod=blowfish
+:X
+
+# do stuff across all buffers
+:bufdo %s/pattern/replace/ge | update
+
+# pipe output into vim
+ls -al / | vi -
+ls -al / | mvim -
+
+# open files in tabs
+vi -p *.rb
+
+# move windows to tabs
+Ctrl-W + Shift-T
