@@ -2,6 +2,8 @@
 vim -u NONE --noplugin -N
 
 # folding
+#########
+
 za # open fold
 zA # open fold recursively
 
@@ -31,7 +33,8 @@ q			Stop recording.
 			that this doesn't produce an error message.
 999@q 			Execute the q register on the remaining files.
 
-# General recording
+# general recording
+###################
 qq            : record keystrokes to register q
 ... enter some commands...
 q             : quit recording
@@ -40,13 +43,9 @@ q             : quit recording
 
 # wrap existing text at 80 characters
 :set textwidth=80
-### select lines with v
-gq
 
 # indent an entire line
 >>
-### or
-<shift> >
 
 # goto top of file
 gg
@@ -90,17 +89,21 @@ zz
 :earlier 35s
 :later 12s.
 
-#spell
+# spelling
+##########
+
 :set spell
 z= # suggest words
 ]s # forwards
 [s # backwards
 
 # cream-capitalization
-  F5           Capitalize selection, title case
-  Shift+F5     Uppercase selection
-  Alt+F5       Lowercase selection
-  Ctrl+F5      Reverse case of selection
+######################
+
+F5           Capitalize selection, title case
+Shift+F5     Uppercase selection
+Alt+F5       Lowercase selection
+Ctrl+F5      Reverse case of selection
 
 # sort and unique
 sort u
