@@ -89,13 +89,15 @@ zz
 :earlier 35s
 :later 12s.
 
-# spelling
-##########
+# spelling (http://vimdoc.sourceforge.net/htmldoc/spell.html)
+#############################################################
 
 :set spell
 z= # suggest words
 ]s # forwards
 [s # backwards
+zg # add as a good word
+zG # add as a good word (internally)
 
 # cream-capitalization
 ######################
