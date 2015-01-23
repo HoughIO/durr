@@ -16,7 +16,7 @@ openssl rsa -in private.pem -pubout
 # create certificate
 openssl req -x509 -batch -nodes -newkey rsa:2048 -keyout KEY_FILE -out CERTIFICATE_FILE
 
-# information about keys
+# information about certificates
 openssl x509 -in CERTIFICATE_FILE -text
 openssl x509 -in CERTIFICATE_FILE -serial
 openssl x509 -in CERTIFICATE_FILE -fingerprint
@@ -42,11 +42,11 @@ mv server.key.insecure server.key
 # self signed wildcard certificate
 openssl genrsa 2048 > server.key
 openssl req -new -x509 -nodes -sha1 -days 3650 -key server.key > server.crt
+
 # Common Name (eg, your name or your server's hostname) []:*.example.com
 openssl x509 -noout -fingerprint -text < server.crt > server.info
 cat server.crt server.key > server.pem
 chmod 644 server.key server.pem
-
 
 openssl s_client -connect some_site.com:443
 openssl s_client -CApath /etc/ssl/certs/ -connect www.fqdn.com:443
