@@ -7,4 +7,4 @@ hdiutil convert -format Rdxx -o $ISO_FILE.img $ISO_FILE
 diskutil list
 diskutil unmountDisk /dev/disk1
 
-sudo dd bs=1m if=$ISO_FILE.img of=/dev/disk1
+sudo dd bs=1m if=$ISO_FILE.img.dmg of=/dev/disk1
