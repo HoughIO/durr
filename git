@@ -73,6 +73,5 @@ git stash show -p stash@{1}
 #################
 
 # search history
-git grep $REGEXP $(git rev-list --all)
-# OR
 git rev-list --all | xargs git grep $REGEX
+git grep $REGEXP $(git rev-list --all) # be careful with this one. Bad exp. in the past
