@@ -1,5 +1,6 @@
-# exif data
-identify -verbose image.jpg
+# exif
+identify -verbose image.jp # view datag
+exiftool -all= image.jpg # remove data
 
 # idunno
 convert -append -background none some_images_* new_image.png
