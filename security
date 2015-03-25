@@ -57,3 +57,9 @@ openssl rsautl -sign -inkey privatekey.pem -keyform PEM -in hash > signature
 
 # verifying
 openssl rsautl -verify -inkey publickey.pem -keyform PEM -in signature
+
+# base64
+$ openssl enc -base64 <<< 'Hello, World!'
+SGVsbG8sIFdvcmxkIQo=
+$ openssl enc -base64 -d <<< SGVsbG8sIFdvcmxkIQo=
+Hello, World!
