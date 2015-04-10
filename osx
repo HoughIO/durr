@@ -2,7 +2,8 @@
 screencapture -T 10 fileName.png
 
 # flush dns
-dscacheutil -flushcache
+dscacheutil -flushcache # this is old now?
+sudo discoveryutil mdnsflushcache
 
 # stop postgress on osx
 pg_ctl stop
